@@ -40,6 +40,7 @@ int main() {
 }
 
 
+// Funtion to check vowel
 bool checkVowel(char c){
 
     if( (c == 'a') || (c == 'e') || (c == 'i') || (c == 'o') || (c == 'u') ){
@@ -50,6 +51,7 @@ bool checkVowel(char c){
 
 }
 
+// Function to translate English words to Obenglobish words
 string obenglobish(string word){
 
     word = toLowerCase(word);
