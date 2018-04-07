@@ -4,4 +4,10 @@ Assignment3-qt/build-*
 Assignment4-qt/build-*
 Assignment5-qt/build-*
 Assignment6-qt/build-*
+StanfordCPPLib/*
+lib/*
+Assignment1-qt/0-Warmup/lib/
 
+Assignment1-qt/0-Warmup/res/
+
+build-hello-world-Desktop-Debug/
