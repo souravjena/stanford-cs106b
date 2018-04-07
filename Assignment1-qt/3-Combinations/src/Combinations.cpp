@@ -25,7 +25,7 @@ int main() {
 
    cout << "c(" << n << "," << k << ") = " << combinationPascal(n, k) << endl;
 
-//   printPascal(n);
+   printPascal(n);
 
    return 0;
 }
