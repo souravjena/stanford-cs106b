@@ -33,21 +33,37 @@ int main() {
 
 string intToString(int n){
 
-    int lastDigit = n % 10;
-    int restDigits = n / 10;
+    int lastDigit;
+    int restDigits;
     char c, d;
+    int originalNum = n;
+
+    if(n < 0){
+        n = -n; // get absolute value of n
+    }
+
+    lastDigit = n % 10;
+    restDigits = n / 10;
 
     if(restDigits < 10){
         // Base Case
         c = restDigits + '0';
         d = lastDigit + '0';
+        
         return ( string(&c)[0] + string(&d) );
 
     } else {
         // Recursive Case
         c = lastDigit + '0';
-        return ( intToString(restDigits) + string(&c)[0] );
+        
+        if(originalNum < 0){
+            return ( '-' + intToString(restDigits) + string(&c)[0] );
+        } else {
+            return ( intToString(restDigits) + string(&c)[0] );
+        }
+        
     }
+
 
 
 }
