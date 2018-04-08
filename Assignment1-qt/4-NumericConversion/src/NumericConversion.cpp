@@ -1,10 +1,11 @@
 /*
  * File: NumericConversion.cpp
  * ---------------------------
- * Name: [TODO: enter name here]
- * Section: [TODO: enter section leader here]
+ * Name: Sourav Jena
+ * Section: Kelly Kapoor
  * This file is the starter project for the numeric-conversion problem
  * in which you implement the functions intToString and stringToInt.
+ *
  * [TODO: rewrite the documentation]
  */
 
@@ -21,6 +22,39 @@ int stringToInt(string str);
 /* Main program */
 
 int main() {
-   // [TODO: fill in the code]
+
+   cout << "Hello World!!" << endl;
+
+   cout << intToString(1234567890);
+
    return 0;
+}
+
+
+string intToString(int n){
+
+    int lastDigit = n % 10;
+    int restDigits = n / 10;
+    char c, d;
+
+    if(restDigits < 10){
+        // Base Case
+        c = restDigits + '0';
+        d = lastDigit + '0';
+        return ( string(&c)[0] + string(&d) );
+
+    } else {
+        // Recursive Case
+        c = lastDigit + '0';
+        return ( intToString(restDigits) + string(&c)[0] );
+    }
+
+
+}
+
+
+int stringToInt(string str){
+
+return 0;
+
 }
