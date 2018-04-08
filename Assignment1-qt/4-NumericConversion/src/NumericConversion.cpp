@@ -27,7 +27,7 @@ int main() {
    cout << "This is a string " + intToString(1234567890) << endl;
    cout << "This is a string " + intToString(-1234567890) << endl;
 
-   cout << stringToInt("1234567890") + 1 << endl;
+   cout << stringToInt("1234567890")  + 1 << endl;
    cout << stringToInt("-1234567890") - 1 << endl;
 
    return 0;
@@ -88,28 +88,27 @@ int stringToInt(string str){
 
     if(str[0] == '-'){ //In case of negative number string
         negFlag = true;
-        length -= 1;
         offset = 1;
     }
 
-    string firstDigit = str.substr(0 + offset,1);
-    string restDigits = str.substr(1 + offset,length);
+    string lastDigit = str.substr(length-1, 1);
+    string restDigits = str.substr(offset, length-1-offset);
     
-    if(length == 1){
+    if(restDigits.length() == 0){
         // Base Case
 
-        c = firstDigit[0] - '0';
+        c = lastDigit[0] - '0';
         return ( (int)c );
 
     } else {
         // Recursive Case
 
-        c = firstDigit[0] - '0';
+        c = lastDigit[0] - '0';
 
         if(negFlag == true){
-            return ( -1 * ( stringToInt(restDigits) +  ( ((int)c) * pow(10, length-1) )  ) );
+            return ( -1 * ( (stringToInt(restDigits) * 10) +  ( (int)c ) ) );
         } else {
-            return ( stringToInt(restDigits) +  ( ((int)c) * pow(10, length-1) )  );
+            return ( (stringToInt(restDigits) * 10) +  ( (int)c ) );
         }
 
 
