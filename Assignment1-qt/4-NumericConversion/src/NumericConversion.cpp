@@ -6,12 +6,13 @@
  * This file is the starter project for the numeric-conversion problem
  * in which you implement the functions intToString and stringToInt.
  *
- * [TODO: rewrite the documentation]
+ * Implementation of integerToString() and stringToInteger() using recursion.
  */
 
 #include <iostream>
 #include <string>
 #include "console.h"
+#include <cmath> //pow()
 using namespace std;
 
 /* Function prototypes */
@@ -23,9 +24,11 @@ int stringToInt(string str);
 
 int main() {
 
-   cout << "Hello World!!" << endl;
+   cout << "This is a string " + intToString(1234567890) << endl;
+   cout << "This is a string " + intToString(-1234567890) << endl;
 
-   cout << intToString(1234567890);
+   cout << stringToInt("1234567890") + 1 << endl;
+   cout << stringToInt("-1234567890") - 1 << endl;
 
    return 0;
 }
@@ -35,7 +38,8 @@ string intToString(int n){
 
     int lastDigit;
     int restDigits;
-    char c, d;
+    char c[2];
+    char d[2];
     int originalNum = n;
 
     if(n < 0){
@@ -47,19 +51,25 @@ string intToString(int n){
 
     if(restDigits < 10){
         // Base Case
-        c = restDigits + '0';
-        d = lastDigit + '0';
-        
-        return ( string(&c)[0] + string(&d) );
+
+        c[0] = restDigits + '0';
+        d[0] = lastDigit + '0';
+
+        c[1] = '\0';
+        d[1] = '\0';
+
+        return ( string(c) + string(d) );
 
     } else {
         // Recursive Case
-        c = lastDigit + '0';
+
+        c[0] = lastDigit + '0';
+        c[1] = '\0';
         
         if(originalNum < 0){
-            return ( '-' + intToString(restDigits) + string(&c)[0] );
+            return ( '-' + intToString(restDigits) + string(c) );
         } else {
-            return ( intToString(restDigits) + string(&c)[0] );
+            return ( intToString(restDigits) + string(c) );
         }
         
     }
@@ -70,7 +80,39 @@ string intToString(int n){
 
 
 int stringToInt(string str){
+    
+    int length = str.length();
+    bool negFlag = false;
+    unsigned char c;
+    unsigned char offset = 0;
 
-return 0;
+    if(str[0] == '-'){ //In case of negative number string
+        negFlag = true;
+        length -= 1;
+        offset = 1;
+    }
+
+    string firstDigit = str.substr(0 + offset,1);
+    string restDigits = str.substr(1 + offset,length);
+    
+    if(length == 1){
+        // Base Case
+
+        c = firstDigit[0] - '0';
+        return ( (int)c );
+
+    } else {
+        // Recursive Case
+
+        c = firstDigit[0] - '0';
+
+        if(negFlag == true){
+            return ( -1 * ( stringToInt(restDigits) +  ( ((int)c) * pow(10, length-1) )  ) );
+        } else {
+            return ( stringToInt(restDigits) +  ( ((int)c) * pow(10, length-1) )  );
+        }
+
+
+    }
 
 }
