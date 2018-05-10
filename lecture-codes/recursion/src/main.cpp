@@ -1,7 +1,10 @@
 #include <iostream>
+#include <string>
+#include <fstream>
 #include "console.h"
 #include "simpio.h"
 #include "map.h"
+#include "filelib.h" // for crawl()
 
 using namespace std;
 
@@ -9,14 +12,21 @@ void printStars(int n); // Fuction to print stars without using for loop
 int power(int base, int exponent); // Function to calculate power
 bool isPalindrome(string s); // Function to check whether the string passed is a palindrome or not
 void printBinary(int n); // Prints Binary of int
+void reverseLine(ifstream &input); // Function to print lines from a file in LIFO order.
+void crawl(string filename, string indent = "");
 
 int main() {
 
 
 //    printStars(5);
 //    cout << power(-1,2);
-    // cout << isPalindrome("gog");
-    printBinary(-32);
+//    cout << isPalindrome("gog");
+//    printBinary(-32);
+
+    // ifstream myfile ("poem.txt");
+    // reverseLine(myfile);
+
+    crawl("/home/sourav/Dropbox/projects/moocs/cs106b/lecture-codes/recursion/");
 
     return 0;
 }
@@ -114,6 +124,52 @@ void printBinary(int n){
    }
    
 }
+
+
+
+// ------------------Reverse-Lines-------------------------------
+void reverseLine(ifstream &input){
+
+    string line;
+
+    if(getline(input, line)){ // get the current line
+
+        // if there is one more line then read again [resurcive case]
+        reverseLine(input); // & is not required as input is already storing address
+
+        // print the current line
+        cout << line << endl;
+
+    } else {
+        // there are no lines left in the file
+    }
+
+}
+
+
+// ------------------Crawl-Directory-------------------------------
+void crawl(string filename, string indent){ // using default parameter for indentation
+
+    cout << indent << getTail(filename) << endl;  // print only file-name/directory-name instead of whole path
+
+    if( isFile(filename) ){
+        // base case
+    
+    } else { // it must be a directory
+        // recursive case
+        Vector<string> files;
+        listDirectory(filename, files); // fills the given vector<sting> with the names of all the files contained in the given directory
+
+        for(string subfile : files){ // iterate through all the strings stored in vector<string> files
+            crawl(filename + "/" + subfile, indent + " ");
+        }
+    
+    }
+
+}
+
+
+
 
 
 
