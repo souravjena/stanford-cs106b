@@ -18,13 +18,8 @@ void cantorSet(GWindow& window, int x, int y, int width, int levels);
 
 int main() {
 
-//    string name = getLine("Your Name Master: ");
-//    cout << "Welcome to CS106B! " << name << endl;
-
-//    Map<string, string> dic;
     GWindow window(800, 300);
 //    window.drawLine(0,0,100,100);
-
     cantorSet(window, 50, 50, 700, 7);
 
     return 0;

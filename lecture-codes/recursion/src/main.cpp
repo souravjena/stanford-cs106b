@@ -1,10 +1,12 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+
 #include "console.h"
 #include "simpio.h"
 #include "map.h"
 #include "filelib.h" // for crawl()
+#include "vector.h"
 
 using namespace std;
 
@@ -13,20 +15,30 @@ int power(int base, int exponent); // Function to calculate power
 bool isPalindrome(string s); // Function to check whether the string passed is a palindrome or not
 void printBinary(int n); // Prints Binary of int
 void reverseLine(ifstream &input); // Function to print lines from a file in LIFO order.
-void crawl(string filename, string indent = "");
+void crawl(string filename, string indent = ""); // Funtion to crawl given directory
+int binarySearch(Vector<int>& v, int value, int start, int end); // Function to Binary Search a int Vector
 
 int main() {
 
-
-//    printStars(5);
-//    cout << power(-1,2);
-//    cout << isPalindrome("gog");
-//    printBinary(-32);
+    // printStars(5);
+    // cout << power(-1,2);
+    // cout << isPalindrome("gog");
+    // printBinary(-32);
 
     // ifstream myfile ("poem.txt");
     // reverseLine(myfile);
 
-    crawl("/home/sourav/Dropbox/projects/moocs/cs106b/lecture-codes/recursion/");
+    // crawl("/home/sourav/Dropbox/projects/moocs/cs106b/lecture-codes/recursion/");
+
+    Vector<int> v1;
+    int end;
+
+    for (int i = 0; i <= 50; i++)
+        v1.add(i);
+
+    end = v1.size();
+    cout << v1[0] << endl;
+    cout << binarySearch(v1, 50, 0, end);
 
     return 0;
 }
@@ -168,7 +180,31 @@ void crawl(string filename, string indent){ // using default parameter for inden
 
 }
 
+//-------------------- Recursive Binary Search ----------------------
+int binarySearch(Vector<int>& v, int value, int start, int end){
 
+    int mid = (end + start)/2;
+
+    // cout << start << "-" << mid << "-" << end << endl;
+
+    if ( (mid < start) || ( mid > end) ){
+        cout << "not found!!" << endl;
+        return -1;
+    }
+
+    if(value == v[mid]){
+        cout << "found it!!" << endl << endl;
+        return mid;
+    } else if (value < v[mid]) {
+        // too small, go left
+        cout << "left" << endl << endl;
+        return binarySearch(v, value, start, mid-1);
+    } else {
+        // too big, go right
+        cout << "right" << endl << endl;
+        return binarySearch(v, value, mid+1, end);
+    }
+}
 
 
 
