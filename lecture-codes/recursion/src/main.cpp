@@ -17,28 +17,38 @@ void printBinary(int n); // Prints Binary of int
 void reverseLine(ifstream &input); // Function to print lines from a file in LIFO order.
 void crawl(string filename, string indent = ""); // Funtion to crawl given directory
 int binarySearch(Vector<int>& v, int value, int start, int end); // Function to Binary Search a int Vector
+void printAllBinary(int digits, string prefix = "");
+void printAllDecimal(int digits, string prefix = "");
 
 int main() {
 
     // printStars(5);
+    // -------------------------
     // cout << power(-1,2);
+    // -------------------------
     // cout << isPalindrome("gog");
+    // -------------------------
     // printBinary(-32);
-
+    // -------------------------
     // ifstream myfile ("poem.txt");
     // reverseLine(myfile);
-
+    // -------------------------
     // crawl("/home/sourav/Dropbox/projects/moocs/cs106b/lecture-codes/recursion/");
+    // -------------------------
+    // Vector<int> v1;
+    // int end;
 
-    Vector<int> v1;
-    int end;
+    // for (int i = 0; i <= 50; i++)
+    //     v1.add(i);
 
-    for (int i = 0; i <= 50; i++)
-        v1.add(i);
+    // end = v1.size();
+    // cout << v1[0] << endl;
+    // cout << binarySearch(v1, 50, 0, end);
+    // -------------------------
+    printAllBinary(3);
+    printAllDecimal(2);
+    // -------------------------
 
-    end = v1.size();
-    cout << v1[0] << endl;
-    cout << binarySearch(v1, 50, 0, end);
 
     return 0;
 }
@@ -208,5 +218,26 @@ int binarySearch(Vector<int>& v, int value, int start, int end){
 
 
 
+//-------------------- Print All Binaries using Decision Tree ----------------------
+void printAllBinary(int digits, string prefix){
 
+    if(digits == 0){
+        cout << prefix << endl;
+    } else {
+        printAllBinary(digits-1, prefix + "0");
+        printAllBinary(digits-1, prefix + "1");
+    }
+}
+
+
+void printAllDecimal(int digits, string prefix){
+
+    if(digits == 0){
+        cout << prefix << endl;
+    } else {
+        for(int i=0; i < 10; i++){
+            printAllDecimal(digits-1, prefix + integerToString(i));
+        }       
+    }
+}
 
